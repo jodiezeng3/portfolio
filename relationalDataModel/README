@@ -1,0 +1,25 @@
+Jodie Zeng
+jzeng9@u.rochester.edu
+CSC 173
+Project 4
+
+For this project, I wasn't able to get a generic tuple struct so I had to create separate
+implementations based on the relation being used. However, the concept behind each is
+all the same. I used structs to create my tuples with the attributes being variables within
+them. My hash table was an array of linked lists. My hash function varied based on relation
+but where I needed to use a char* as a key, I used the implementation found in the book in 
+fig 7.11. For insert, I would check if that specific bucket had been accessed already, if not
+I would create a new list and add the tuple. If it had already been used, I checked to see if
+the tuple was already in the list in the bucket. If it wasn't it was added. For lookup, if 
+the key was filled in the user input, I hashed it and return the set that matched the other 
+requirements. If it wasn't I stepped through the whole hash table to find the tuples matching 
+the requirements. Delete was the same but instead of returning the elements I would delete
+them when I found them. 
+
+For the relational algebra examples, I followed the implementations we discussed in
+class. For selection I stepped through the relation to find tuples that matched. For
+projection I added the required attributes to the reduced tuple. For join I used the nested-
+loop join. 
+
+To build my project the files 'hashtable.c', 'relationalDataModel.c', and 'LinkedList.c'
+must be included in the command line.
