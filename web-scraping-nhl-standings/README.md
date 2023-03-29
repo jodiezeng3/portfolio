@@ -9,7 +9,8 @@
         <li><a href="https://www.edureka.co/blog/web-scraping-with-python/#steps">web scraping tutorial</a></li>
         <li><a href="https://www.flipkart.com/laptops-store?otracker=nmenu_sub_Electronics_0_Laptops">web scraping source link</a></li>
     </ul>
-
+    
+<h2>Walkthrough:</h2>
 <p>First, I completed the linked web scraping tutorial to learn the basics of web scraping.</p>
 <p>Then worked on trying to parse through the tables on ESPN. This was a little more complicated since the data is in tables and each type of statistic is nested inside a table.</p> 
 <p>Finally, I manipulated the resulting CSV in Google Sheets to calculate the neseccary data to recalculate the standings with the adjusted point system. To do this, I first had to calculate the regulation losses and overtime wins for each team. Then I calculated the adjusted total points for each team and used those form the new league rankings. I then calculated the change in the standings by subtracting the original standings from the adjusted stangings. By doing this, any team that moved up in the league rankings would have a positive change while those who dropped would have a negative change. I then added a row to show the change in the point totals. I also added columns to display the original point percentage of each team and the adjusted point percentage of each team. This was done by dividing the total points for each system by the total number of points they could have gotten if they had won all of those games in regulation.</p>
