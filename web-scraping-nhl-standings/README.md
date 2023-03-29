@@ -5,9 +5,9 @@
 <h2>Sources Used:</h2>
     <ul>
         <li><a href="https://stackoverflow.com/questions/64717302/deprecationwarning-executable-path-has-been-deprecated-selenium-python">stackoverflow (for setting up webdriver)</a></li>
-        <li>- stackoverflow 2 (guessed parser warning for beautiful soup): https://stackoverflow.com/questions/33511544/how-to-get-rid-of-beautifulsoup-user-warning</li>
-        <li>- web scraping tutorial: https://www.edureka.co/blog/web-scraping-with-python/#steps</li>
-        <li>- web scraping source link: https://www.flipkart.com/laptops-store?otracker=nmenu_sub_Electronics_0_Laptops</li>
+        <li><a href="https://stackoverflow.com/questions/33511544/how-to-get-rid-of-beautifulsoup-user-warning">stackoverflow 2 (guessed parser warning for beautiful soup)</a></li>
+        <li><a href="https://www.edureka.co/blog/web-scraping-with-python/#steps">web scraping tutorial</a></li>
+        <li><a href="https://www.flipkart.com/laptops-store?otracker=nmenu_sub_Electronics_0_Laptops">web scraping source link</a></li>
     </ul>
 
 <p>First, I completed the linked web scraping tutorial to learn the basics of web scraping.</p>
