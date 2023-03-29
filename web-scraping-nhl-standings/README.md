@@ -1,6 +1,6 @@
 <h1>Web Scraping Project</h1>
 
-<p>My goal was to be able to scrape data from the ESPN website to put the NHL standings into a CSV file type and then manipulate that data to see what the NHL standings would look like with a different point system (3 points for a regulation win, 2 points for an overtime or shootout win, 1 point for an overtime or shootout loss, 0 points for a regulation loss). Scraped the data using python libraries (pandas, selenium, beautiful soup) and then used Google Sheets to manipulate and visulaize the data.</p> 
+<p>My goal was to be able to scrape data from the ESPN website to put the NHL standings into a CSV file type and then manipulate that data to see what the NHL standings would look like with a different point system (3 points for a regulation win, 2 points for an overtime or shootout win, 1 point for an overtime or shootout loss, 0 points for a regulation loss). I scraped the data using python libraries (pandas, selenium, beautiful soup) and then used Google Sheets to manipulate and visulaize the data.</p> 
 
 <h2>Sources Used:</h2>
     <ul>
