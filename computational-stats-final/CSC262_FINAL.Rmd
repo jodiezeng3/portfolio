@@ -1,0 +1,117 @@
+---
+output: pdf_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("C:/Users/jzeng/Desktop/ur/Fall 2022/CSC 262")
+```
+***5. a)***\
+``` {r frame_gender 1}
+diabetes <- read.csv("diabetes_fall2022.csv")
+table1 <- table(diabetes$gender, diabetes$frame)
+addmargins(table1)
+```
+***5. b)***\
+```{r frame_gender 2}
+barplot(prop.table(table1,margin=1), xlab="Frame", legend.text = rownames(table1), 
+        col=c("darkolivegreen3", "goldenrod3")) 
+```
+***5. c)***\
+$H_0:$ frame and gender are independent vs $H_1:$ frame and gender are associated
+$\alpha = 0.05$
+```{r frame_gender 3}
+chisq.test(table1, correct=F)
+qchisq(1-0.05, df = (3-1)*(2-1))
+```
+We get a critical value of 5.9915 and a p-value of 0.00008548. Since $5.9915 < 18.734 = X^2$ and $0.00008548 < 0.05 = \alpha$, we reject the null hypothesis that frame and gender are independent and conclude that there is an association between frame and gender.\ 
+***6. a)***\
+$H_0:\sigma_m^2 = \sigma_f^2$ vs $H_1:\sigma_m^2 \ne \sigma_f^2$
+$\alpha = 0.01$
+```{r stab.glu_gender 1}
+s_m <- var(diabetes[diabetes$gender=="male",]$stab.glu)
+n_m <- length(diabetes[diabetes$gender=="male",]$stab.glu)
+s_f <- var(diabetes[diabetes$gender=="female",]$stab.glu)
+n_f <- length(diabetes[diabetes$gender=="female",]$stab.glu)
+
+f_obs <- s_m/s_f
+f_obs
+2*(1-pf(f_obs, n_m-1, n_f-1))
+```
+Since p-value = $4.1233*10^{-7} < 0.01 = \alpha$, we reject the null hypothesis that the variances of stabilized glucose for gender are the same.\
+
+***6. b)***\
+$H_0:\mu_m - \mu_f \le 0$ vs $H_1:\mu_m - \mu_f > 0$\
+$\alpha = 0.05$
+```{r stab.glu_gender 2}
+t.test(diabetes[diabetes$gender=="male",]$stab.glu, diabetes[diabetes$gender=="female",]$stab.glu, 
+       alternative="greater", conf.level = 0.95)
+```
+Since p-value = $0.0653 > 0.05 = \alpha$, we fail to reject the null hypothesis that the mean stabilized glucose of males is less than or equal to the stabilized glucose of females.\ 
+***7. a)***\ 
+```{r stab.glu 1}
+plot(diabetes$glyhb, diabetes$stab.glu, pch=4, main="Stabilized glucose over glycosylated hemoglobin", 
+     ylab = "Stabilized Glucose", xlab = "Glycosylated Hemoglobin")
+cor(diabetes$glyhb, diabetes$stab.glu)
+```
+There appears to be a moderately strong linear relationship between the two variables based on the correlation of  0.7408 and the scatterplor, indicating linear regression to be appropriate.
+
+***7. b)***\ 
+$H_0: \rho = 0$ vs $H_1: \rho \ne 0$\ 
+$\alpha = 0.05$\ 
+```{r stab.glu 2}
+cor.test(diabetes$glyhb, diabetes$stab.glu)
+qt(1-(0.05/2), df = length(diabetes$glyhb)-2)
+```
+We find the p-value to be less than $2.2*10^{-16}$ and the test statistic to be 21.186. Since $2.2*10^{-16} < 0.05 = \alpha$, we reject the null hypothesis that stabilized glucose and glycosylated hemoglobin are independent.
+***7. c)***\ 
+```{r stab.glu 3}
+lm1 <- lm(diabetes$stab.glu~diabetes$glyhb)
+lm1
+```
+The regression equation is $y = 17.930x + 6.945$\ 
+
+***7. d)***\ 
+$\alpha = 0.01$
+```{r stab.glu 4}
+confint(lm1, level=0.99)
+```
+We are 99% confident that the slope for the regression equation falls between 15.7391 and 20.1218.
+
+***7. e)***\
+```{r stab.glu 5}
+summary(lm1)
+```
+54.88% of the variability in the glycosylated hemoglobin is explained by its linear relationship with stabilized glucose.
+
+***7. f)***\ 
+```{r stab.glu 6}
+lm2 <- lm(diabetes$stab.glu~diabetes$glyhb+diabetes$bmi+diabetes$frame)
+lm2
+```
+$y_{large} = 17.7060x_{glyhb} * 0.1715x_{bmi} + 9.3176$\ 
+$y_{medium} = 17.7060x_{glyhb} * 0.1715x_{bmi} + 0.0298$\ 
+$y_{small} = 17.7060x_{glyhb} * 0.1715x_{bmi} + 3.0768$\ 
+The slope for all the equations is the same but each different frame has a different intercept.
+
+***7. g)***\ 
+```{r stab.glu 7}
+summary(lm2)
+```
+Multiple R-squared is 0.5548 and the adjusted R-squared is 0.55, since the adjusted R-squred is lower, that means that we added a variable that is not impactful on the output.\ 
+
+***7. h)***\ 
+$H_0:$ The bmi variable does not predict stabilized glucose vs $H_1:$ The bmi variable significantly predicts stabilized glucose\ 
+$H_0:$ The frame variable does not predict stabilized glucose vs $H_1:$ The frame variable significantly predicts stabilized glucose\ 
+$\alpha = 0.05$\ 
+```{r stab.glu 8}
+lm3 <- lm(diabetes$stab.glu~diabetes$bmi+diabetes$frame)
+anova(lm3)
+```
+We find the test statistic for bmi to be 6.8555 and the test statistic for frame to be 3.6580. Since the bmi p-value = $0.009203 < 0.05 = \alpha$, we reject the null hypothesis that the bmi variable does not predict stabilized glucose. Since the frame p-value  = $0.026726 < 0.05 = \alpha$, we reject the null hypothesis that the frame variable does not predict stabilized glucose.\ 
+
+***7. i)***\ 
+```{r stab.glu 9}
+par(mfrow=c(2,2))
+plot(lm2)
+```
+In the residuals vs fitted graph, we see increasing variability which indicates that the relationship is potentially non-linear and our regression line is not appropriate for modeling the data. For our homoscedasticity, we do not see a constant variance across all values of x. The QQ plot shows that the data skews right which means that our values do not have a normal distrbution.
